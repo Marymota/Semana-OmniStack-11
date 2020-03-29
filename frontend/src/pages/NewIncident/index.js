@@ -8,75 +8,75 @@ import './styles.css';
 
 import logoImg from '../../assets/logo.svg';
 
-export default function NewIncidents() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [value, setValue] = useState('');
+export default function NewIncident() {
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+	const [value, setValue] = useState('');
 
-    const history = useHistory();
+	const history = useHistory();
 
-    const ongId = localStorage.getItem('ongId');
+	const ongId = localStorage.getItem('ongId');
 
-    async function handleNewIncident(e) {
-        e.preventDefault();
+	async function handleNewIncident(e) {
+		e.preventDefault();
 
-        const data = {
-            title,
-            description,
-            value,
-        }; 
+		const data = {
+			title,
+			description,
+			value,
+		};
 
-        try {
-            await api.post('incidents', data, {
-                headers: {
-                    Authorization: onpagehide,
-                }
-            })
+		try {
+			await api.post('incidents', data, {
+				headers: {
+					Authorization: ongId,
+				}
+			})
 
-          history.push('/profile');  
-        } catch (err) {
-           alert('Error in the registry, please try again.') 
-        }
+			history.push('/profile');
+		} catch (err) {
+			alert('Error in the registry, please try again.')
+		}
 
-    }
+	}
 
-    return (
-        <div className="newIncident-container">
-            <div className="content">
-                <section>
-                    <img src={logoImg} alt ="Be The Hero"/>
+	return (
+		<div className="newIncident-container">
+			<div className="content">
+				<section>
+					<img src={logoImg} alt="Be The Hero" />
 
-                    <h1>Submit a new case</h1>
-                    <p>Give us a detailed description about your case and why you need people's help.</p>
+					<h1>Submit a new case</h1>
+					<p>Give us a detailed description about your case and why you need people's help.</p>
 
-                    <Link className="back-link" to="/profile">
-                        <FiArrowLeft size={16} color="#E02041" />
-                            Back to Home
-                    </Link>
-                </section>
+				<Link className="back-link" to="/profile">
+					<FiArrowLeft size={16} color="#E02041" />
+           Back to Home
+        	</Link>
+				</section>
 
-                <form onSubmit={handleNewIncident}>
-                    <input 
-                        placeholder="Case title"
-                        value ={title} 
-                        onChange={e => setTitle(e.target.value)}                        
-                        />
+				<form onSubmit={handleNewIncident}>
+					<input
+						placeholder="Case title"
+						value={title}
+						onChange={e => setTitle(e.target.value)}
+					/>
 
-                    <textarea 
-                        placeholder="Discription"
-                        value ={description} 
-                        onChange={e => setDescription(e.target.value)}
-                         />
+					<textarea
+						placeholder="Description"
+						value={description}
+						onChange={e => setDescription(e.target.value)}
+					/>
 
-                    <input 
-                        placeholder ="Value"
-                        value ={value} 
-                        onChange={e => setValue(e.target.value)}
-                         />
+					<input
+						placeholder="Value"
+						value={value}
+						onChange={e => setValue(e.target.value)}
+					/>
 
-                    <button className="button" type="submit" >Register</button>
-                </form>
-            </div>
-        </div>
-    )
+					<button className="button" type="submit">Register</button>
+				</form>
+			</div>
+		</div>
+	)
 }

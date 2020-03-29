@@ -14,7 +14,7 @@ export default function Login() {
     const history = useHistory();
 
 async function handleLogin(e) {
-    e.prevenDefault();
+    e.preventDefault();
 
     try {
         const response = await api.post('sessions', { id });
